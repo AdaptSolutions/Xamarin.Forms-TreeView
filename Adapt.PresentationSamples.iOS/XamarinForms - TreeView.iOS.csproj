@@ -113,9 +113,9 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Adapt.PresentationSamples.Standard\Adapt.PresentationSamples.Standard.csproj">
-      <Project>{9a1ed959-56be-48db-bd07-545b00242318}</Project>
-      <Name>Adapt.PresentationSamples.Standard</Name>
+    <ProjectReference Include="..\Adapt.PresentationSamples.Standard\XamarinForms - TreeView.Standard.csproj">
+      <Project>{B50C30AD-574E-4FBC-8BB5-C8C59B7DEFD5}</Project>
+      <Name>XamarinForms - TreeView.Standard</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

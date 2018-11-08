@@ -3,13 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27428.2037
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Adapt.PresentationSamples.Standard", "Adapt.PresentationSamples.Standard\Adapt.PresentationSamples.Standard.csproj", "{B50C30AD-574E-4FBC-8BB5-C8C59B7DEFD5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "XamarinForms - TreeView.Standard", "Adapt.PresentationSamples.Standard\XamarinForms - TreeView.Standard.csproj", "{B50C30AD-574E-4FBC-8BB5-C8C59B7DEFD5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adapt.PresentationSamples.UWP", "Adapt.PresentationSamples.UWP\Adapt.PresentationSamples.UWP.csproj", "{C63C5247-D337-4525-A705-42366FA1A05D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinForms - TreeView.UWP", "Adapt.PresentationSamples.UWP\XamarinForms - TreeView.UWP.csproj", "{C63C5247-D337-4525-A705-42366FA1A05D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adapt.PresentationSamples.Droid", "Adapt.PresentationSamples.Droid\Adapt.PresentationSamples.Droid.csproj", "{6BB44328-00E5-430B-9048-E4C2E1BBD2B9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinForms - TreeView.Droid", "Adapt.PresentationSamples.Droid\XamarinForms - TreeView.Droid.csproj", "{6BB44328-00E5-430B-9048-E4C2E1BBD2B9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Adapt.PresentationSamples.iOS", "Adapt.PresentationSamples.iOS\Adapt.PresentationSamples.iOS.csproj", "{ADE5BE45-7179-4D87-BCCC-9FAE588F371A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XamarinForms - TreeView.iOS", "Adapt.PresentationSamples.iOS\XamarinForms - TreeView.iOS.csproj", "{ADE5BE45-7179-4D87-BCCC-9FAE588F371A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
