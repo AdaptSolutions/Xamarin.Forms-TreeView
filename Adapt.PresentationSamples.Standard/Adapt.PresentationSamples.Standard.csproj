@@ -1,0 +1,42 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <DebugType>pdbonly</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Model\AdaptObservableCollection.cs" />
+    <Compile Remove="Model\AsyncListViewModel.cs" />
+    <Compile Remove="Model\DateTimeModel.cs" />
+    <Compile Remove="Model\ItemModel.cs" />
+    <Compile Remove="Model\ItemModelProvider.cs" />
+    <Compile Remove="Model\TestModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Resource\Blank.png" />
+    <None Remove="Resource\CollpsedGlyph.png" />
+    <None Remove="Resource\FolderClosed.png" />
+    <None Remove="Resource\FolderOpen - Copy.png" />
+    <None Remove="Resource\FolderOpen.png" />
+    <None Remove="Resource\Item.png" />
+    <None Remove="Resource\OpenGlyph.png" />
+    <None Remove="XamlItemGroups.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Resource\Blank.png" />
+    <EmbeddedResource Include="Resource\CollpsedGlyph.png" />
+    <EmbeddedResource Include="Resource\FolderClosed.png" />
+    <EmbeddedResource Include="Resource\FolderOpen.png" />
+    <EmbeddedResource Include="Resource\Item.png" />
+    <EmbeddedResource Include="Resource\OpenGlyph.png" />
+    <EmbeddedResource Include="Resource\XamlItemGroups.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Xamarin.Forms" Version="3.1.0.583944" />
+  </ItemGroup>
+
+</Project>
