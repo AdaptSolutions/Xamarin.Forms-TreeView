@@ -1,4 +1,5 @@
-﻿using samples = Adapt.PresentationSamples;
+﻿
+using XamarinFormsTreeView;
 
 namespace XamForms.UWP
 {
@@ -8,8 +9,7 @@ namespace XamForms.UWP
         {
             InitializeComponent();
 
-            //var app = new samples.App(new PresentationFactory(), new Permissions(), new Geolocator(), new Clipboard(), new InAppNotification(), new FileSource());
-            var app = new samples.App();
+            var app = new XamarinFormsTreeView.App();
 
             LoadApplication(app);
         }

@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <DebugType>pdbonly</DebugType>
+    <RootNamespace>XamarinFormsTreeView</RootNamespace>
+    <AssemblyName>XamarinFormsTreeView</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>

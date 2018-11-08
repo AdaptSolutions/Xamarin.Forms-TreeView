@@ -1,4 +1,6 @@
-﻿namespace Adapt.PresentationSamples
+﻿using Adapt.PresentationSamples;
+
+namespace XamarinFormsTreeView
 {
     public partial class App
     {
@@ -12,16 +14,8 @@
         #endregion
 
         #region Constructor
-        //public App(IPresentationFactory presentationFactory, IPermissions currentPermissions, IGeolocator geolocator, IClipboard clipboard, IInAppNotification inAppNotification, IFileSource fileSource)
         public App()
         {
-            //PresentationFactory = presentationFactory;
-            //CurrentPermissions = currentPermissions;
-            //Geolocator = geolocator;
-            //Clipboard = clipboard;
-            //InAppNotification = inAppNotification;
-            //FileSource = fileSource;
-
             var mainPage = new MainPage();
 
             InitializeComponent();
