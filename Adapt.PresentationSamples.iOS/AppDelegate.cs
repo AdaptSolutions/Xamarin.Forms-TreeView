@@ -1,8 +1,6 @@
 ﻿using Foundation;
 using UIKit;
 using Adapt.PresentationSamples;
-using Adapt.Presentation.iOS.Geolocator;
-using Adapt.Presentation.iOS.ToastNotifications;
 
 namespace Adapt.Presentation.iOS
 {
@@ -22,7 +20,7 @@ namespace Adapt.Presentation.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             Xamarin.Forms.Forms.Init();
-            LoadApplication(new App(new PresentationFactory(), new Permissions(), new Geolocator.Geolocator(), new Clipboard(), new InAppNotification(), new FileSource()));
+            LoadApplication(new App());
 
             return base.FinishedLaunching(app, options);
         }
