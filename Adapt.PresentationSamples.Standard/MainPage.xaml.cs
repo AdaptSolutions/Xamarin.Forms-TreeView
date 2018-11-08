@@ -32,7 +32,7 @@ namespace Adapt.PresentationSamples
             _IsLoaded = true;
 
             var assembly = typeof(MainPage).GetTypeInfo().Assembly;
-            var stream = assembly.GetManifestResourceStream("Adapt.PresentationSamples.Standard.Resource.XamlItemGroups.xml");
+            var stream = assembly.GetManifestResourceStream("XamarinFormsTreeView.Resource.XamlItemGroups.xml");
             string xml;
             using (var reader = new StreamReader(stream))
             {
@@ -87,7 +87,7 @@ namespace Adapt.PresentationSamples
                         {
                             new ResourceImage
                             {
-                                Resource = isItem? "Adapt.PresentationSamples.Standard.Resource.Item.png" :"Adapt.PresentationSamples.Standard.Resource.FolderOpen.png" ,
+                                Resource = isItem? "XamarinFormsTreeView.Resource.Item.png" :"XamarinFormsTreeView.Resource.FolderOpen.png" ,
                                 HeightRequest= 16,
                                 WidthRequest = 16
                             },

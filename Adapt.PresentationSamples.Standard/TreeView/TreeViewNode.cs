@@ -9,9 +9,9 @@ namespace Xamarin.Forms
     public class TreeViewNode : StackLayout
     {
         #region TODO
-        private const string CollapseImagePath = "Adapt.PresentationSamples.Standard.Resource.CollpsedGlyph.png";
-        private const string OpenImagePath = "Adapt.PresentationSamples.Standard.Resource.OpenGlyph.png";
-        private const string BlankImagePath = "Adapt.PresentationSamples.Standard.Resource.Blank.png";
+        private const string CollapseImagePath = "XamarinFormsTreeView.Resource.CollpsedGlyph.png";
+        private const string OpenImagePath = "XamarinFormsTreeView.Resource.OpenGlyph.png";
+        private const string BlankImagePath = "XamarinFormsTreeView.Resource.Blank.png";
         #endregion
 
         #region Fields
