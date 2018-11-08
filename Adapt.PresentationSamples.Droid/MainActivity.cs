@@ -3,8 +3,7 @@
 using Android.App;
 using Android.Content.PM;
 using Android.OS;
-using Android.Runtime;
-using samples = Adapt.PresentationSamples;
+using XamarinFormsTreeView;
 using xf = Xamarin.Forms;
 
 namespace XamForms.Droid
@@ -17,7 +16,7 @@ namespace XamForms.Droid
         {
             base.OnCreate(bundle);
             xf.Forms.Init(this, bundle);
-            LoadApplication(new samples.App());
+            LoadApplication(new App());
         }
         #endregion
 
