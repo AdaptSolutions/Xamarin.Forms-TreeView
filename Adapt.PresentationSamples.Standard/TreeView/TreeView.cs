@@ -44,19 +44,7 @@ namespace Xamarin.Forms
             }
         }
 
-        /// <summary>
-        /// The colour of the selected item
-        /// TODO: Make this a bindable property for styling purposes
-        /// </summary>
-        public Color SelectedBackgroundColour { get; } = Color.Blue;
-
-
-        /// <summary>
-        /// The opacity of the box that sits over the top of the selected item
-        /// TODO: Make this a bindable property for styling purposes
-        /// </summary>
-        public double SelectedBackgroundOpacity { get; } = .5;
-
+      
         public IList<TreeViewNode> RootNodes
         {
             get => _RootNodes;
@@ -83,6 +71,8 @@ namespace Xamarin.Forms
         /// Occurs when the user selects a TreeViewItem
         /// </summary>
         public event EventHandler SelectedItemChanged;
+
+
         #endregion
 
         #region Constructor
@@ -130,8 +120,8 @@ namespace Xamarin.Forms
         {
             SelectedItem = child;
             child.IsSelected = true;
-            child.SelectionBoxView.Color = SelectedBackgroundColour;
-            child.SelectionBoxView.Opacity = SelectedBackgroundOpacity;
+            child.SelectionBoxView.Color = child.SelectedBackgroundColor;
+            child.SelectionBoxView.Opacity = child.SelectedBackgroundOpacity;
             RemoveSelectionRecursive(RootNodes);
         }
         #endregion

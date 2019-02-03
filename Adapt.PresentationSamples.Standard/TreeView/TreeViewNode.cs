@@ -8,10 +8,9 @@ namespace Xamarin.Forms
 {
     public class TreeViewNode : StackLayout
     {
-        #region TODO
-        private const string CollapseImagePath = "XamarinFormsTreeView.Resource.CollpsedGlyph.png";
-        private const string OpenImagePath = "XamarinFormsTreeView.Resource.OpenGlyph.png";
-        private const string BlankImagePath = "XamarinFormsTreeView.Resource.Blank.png";
+        #region Image source for icons
+        private DataTemplate _ExpandButtonTemplate=null;
+       
         #endregion
 
         #region Fields
@@ -20,14 +19,13 @@ namespace Xamarin.Forms
         private DateTime _ExpandButtonClickedTime;
 
         private readonly BoxView _SpacerBoxView = new BoxView();
+        private readonly BoxView _EmptyBox = new BoxView { BackgroundColor=Color.Blue, Opacity = .5 };
 
-        private const int ExpandButtonWidth = 32;
-        private readonly ContentView _ExpandButtonContent = new ContentView();
 
-        //TODO: Get rid of this...
-        private ResourceImage _ExpandImage;
+    private const int ExpandButtonWidth = 32;
+        private  ContentView _ExpandButtonContent = new ContentView();
 
-        private readonly Grid _MainGrid = new Grid
+       private readonly Grid _MainGrid = new Grid
         {
             VerticalOptions = LayoutOptions.StartAndExpand,
             HorizontalOptions = LayoutOptions.FillAndExpand,
@@ -51,6 +49,8 @@ namespace Xamarin.Forms
         private IList<TreeViewNode> _Children = new ObservableCollection<TreeViewNode>();
         private readonly TapGestureRecognizer _TapGestureRecognizer = new TapGestureRecognizer();
         private readonly TapGestureRecognizer _ExpandButtonGestureRecognizer = new TapGestureRecognizer();
+
+        private readonly TapGestureRecognizer _DoubleClickGestureRecognizer = new TapGestureRecognizer();
         #endregion
 
         #region Internal Fields
@@ -62,10 +62,19 @@ namespace Xamarin.Forms
         private double IndentWidth => Depth * SpacerWidth;
         private int SpacerWidth { get; } = 30;
         private int Depth => ParentTreeViewItem?.Depth + 1 ?? 0;
+
+        private bool _ShowExpandButtonIfEmpty = false;
+        private Color _SelectedBackgroundColor= Color.Blue;
+        private double _SelectedBackgroundOpacity= .3;
         #endregion
 
         #region Events
         public event EventHandler Expanded;
+
+        /// <summary>
+        /// Occurs when the user double clicks on the node
+        /// </summary>
+        public event EventHandler DoubleClicked;
         #endregion
 
         #region Protected Overrides
@@ -96,6 +105,42 @@ namespace Xamarin.Forms
                     Expanded?.Invoke(this, new EventArgs());
                 }
             }
+        }
+
+        /// <summary>
+        /// set to true to show the expand button in case we need to poulate the child nodes on demand
+        /// </summary>
+        public bool ShowExpandButtonIfEmpty
+        {
+            get { return _ShowExpandButtonIfEmpty; }
+            set { _ShowExpandButtonIfEmpty = value; }
+        }
+      
+        /// <summary>
+        /// set BackgroundColor when node is tapped/selected
+        /// </summary>
+        public Color SelectedBackgroundColor
+        {
+            get { return _SelectedBackgroundColor; }
+            set { _SelectedBackgroundColor = value; }
+        }
+
+        /// <summary>
+        /// SelectedBackgroundOpacity when node is tapped/selected
+        /// </summary>
+        public Double SelectedBackgroundOpacity
+        {
+            get { return _SelectedBackgroundOpacity; }
+            set { _SelectedBackgroundOpacity = value; }
+        }
+
+        /// <summary>
+        /// customize expand icon based on isExpanded property and or data 
+        /// </summary>
+        public DataTemplate ExpandButtonTemplate
+        {
+            get { return _ExpandButtonTemplate; }
+            set { _ExpandButtonTemplate = value; }
         }
 
         public View Content
@@ -163,11 +208,16 @@ namespace Xamarin.Forms
             _ContentStackLayout.Children.Add(_SpacerBoxView);
             _ContentStackLayout.Children.Add(_ExpandButtonContent);
             _ContentStackLayout.Children.Add(_ContentView);
-
-            SetExpandButtonContent(IsExpanded ? OpenImagePath : CollapseImagePath);
+          
+            SetExpandButtonContent(_ExpandButtonTemplate);
 
             _ExpandButtonGestureRecognizer.Tapped += ExpandButton_Tapped;
             _ExpandButtonContent.GestureRecognizers.Add(_ExpandButtonGestureRecognizer);
+
+            _DoubleClickGestureRecognizer.NumberOfTapsRequired = 2;
+            _DoubleClickGestureRecognizer.Tapped += DoubleClick;
+            _ContentView.GestureRecognizers.Add(_DoubleClickGestureRecognizer);
+
 
             _MainGrid.Children.Add(_ContentStackLayout);
             _MainGrid.Children.Add(_ChildrenStackLayout, 0, 1);
@@ -179,6 +229,11 @@ namespace Xamarin.Forms
 
             Render();
         }
+
+        void _DoubleClickGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+        }
+
 
         #endregion
 
@@ -197,13 +252,13 @@ namespace Xamarin.Forms
         {
             _SpacerBoxView.WidthRequest = IndentWidth;
 
-            if (Children == null || Children.Count == 0)
+            if ((Children == null || Children.Count == 0) && !ShowExpandButtonIfEmpty)
             {
-                SetExpandButtonContent(BlankImagePath);
+                SetExpandButtonContent(_ExpandButtonTemplate);
                 return;
             }
 
-            SetExpandButtonContent(IsExpanded ? OpenImagePath : CollapseImagePath);
+            SetExpandButtonContent(_ExpandButtonTemplate);
 
             foreach (var item in Children)
             {
@@ -212,20 +267,23 @@ namespace Xamarin.Forms
         }
 
         /// <summary>
-        /// TODO: This should not create an image every time. It probably should create content from a DataTemplate
-        /// TODO: Unhard code the width/height
+        /// Use DataTemplae 
         /// </summary>
-        private void SetExpandButtonContent(string imageName)
+        private void SetExpandButtonContent(DataTemplate expandButtonTemplate)
         {
-            _ExpandImage = new ResourceImage { WidthRequest = 16, HeightRequest = 16 };
-            _ExpandImage.SetValue(ResourceImage.ResourceProperty, imageName);
-            _ExpandButtonContent.Content = _ExpandImage;
+            if (expandButtonTemplate != null)
+            {
+                _ExpandButtonContent.Content = (View)expandButtonTemplate.CreateContent();
+            }
+            else
+            {
+                _ExpandButtonContent.Content = (View)new ContentView { Content = _EmptyBox };
+            }
         }
+            #endregion
 
-        #endregion
-
-        #region Event Handlers
-        private void ExpandButton_Tapped(object sender, EventArgs e)
+            #region Event Handlers
+            private void ExpandButton_Tapped(object sender, EventArgs e)
         {
             _ExpandButtonClickedTime = DateTime.Now;
             IsExpanded = !IsExpanded;
@@ -238,6 +296,12 @@ namespace Xamarin.Forms
             {
                 ChildSelected(this);
             }
+        }
+
+
+        private void DoubleClick(object sender, EventArgs e)
+        {
+            DoubleClicked?.Invoke(this, new EventArgs());
         }
 
         private void ItemsSource_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
