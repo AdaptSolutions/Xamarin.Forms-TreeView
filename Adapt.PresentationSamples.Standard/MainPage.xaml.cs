@@ -78,7 +78,7 @@ namespace Adapt.PresentationSamples
 
         private static TreeViewNode CreateTreeViewNode(object bindingContext, Label label, bool isItem)
         {
-            return new TreeViewNode
+           var node= new TreeViewNode
             {
                 BindingContext = bindingContext,
                 Content = new StackLayout
@@ -96,9 +96,50 @@ namespace Adapt.PresentationSamples
                     Orientation = StackOrientation.Horizontal
                 }
             };
+            node.SelectedBackgroundColor;
+
+            //set DataTemplate for expand button content
+            node.ExpandButtonTemplate = new DataTemplate(() => new ExpandButtonContent { BindingContext = node});
+
+            return node;
         }
 
-        private static ObservableCollection<TreeViewNode> ProcessXamlItemGroups(XamlItemGroup xamlItemGroups)
+
+        //set what icons shows for expanded/Collapsed/Leafe Nodes or on request node expand icon (when ShowExpandButtonIfEmpty true).
+        public class ExpandButtonContent : ContentView
+        {
+
+            protected override void OnBindingContextChanged()
+            {
+                base.OnBindingContextChanged();
+
+                var node = (BindingContext as TreeViewNode);
+                bool isLeafNode = (node.Children == null || node.Children.Count == 0);
+
+                //empty nodes have no icon to expand unless showExpandButtonIfEmpty is et to true which will show the expand
+                //icon can click and populated node on demand propably using the expand event.
+                if ((isLeafNode) && !node.ShowExpandButtonIfEmpty)
+                {
+                    Content = new ResourceImage
+                    {
+                        Resource = isLeafNode ? "XamarinFormsTreeView.Resource.Blank.png" : "XamarinFormsTreeView.Resource.FolderOpen.png",
+                        HeightRequest = 16,
+                        WidthRequest = 16
+                    };
+                }
+                else
+                {
+                    Content = new ResourceImage
+                    {
+                        Resource = node.IsExpanded ? "XamarinFormsTreeView.Resource.OpenGlyph.png" : "XamarinFormsTreeView.Resource.CollpsedGlyph.png",
+                        HeightRequest = 16,
+                        WidthRequest = 16
+                    };
+                }
+            }
+
+        }
+            private static ObservableCollection<TreeViewNode> ProcessXamlItemGroups(XamlItemGroup xamlItemGroups)
         {
             var rootNodes = new ObservableCollection<TreeViewNode>();
 
