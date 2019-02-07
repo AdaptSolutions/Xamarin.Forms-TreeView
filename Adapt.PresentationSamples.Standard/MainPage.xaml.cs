@@ -96,7 +96,6 @@ namespace Adapt.PresentationSamples
                     Orientation = StackOrientation.Horizontal
                 }
             };
-            node.SelectedBackgroundColor;
 
             //set DataTemplate for expand button content
             node.ExpandButtonTemplate = new DataTemplate(() => new ExpandButtonContent { BindingContext = node});
